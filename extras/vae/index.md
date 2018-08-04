@@ -10,48 +10,6 @@ Variational autoencoders (VAEs) are a deep learning technique for learning laten
 There are many online tutorials on VAEs. 
 Our presentation will probably be a bit more technical than the average, since our goal will be to highlight connections to ideas seen in class, as well as to show how these ideas are useful in machine learning research.
 
-## Deep generative models
-
-Consider a [directed](../../representation/directed) [latent-variable](../../learning/latent) model of the form
-{%math%}
-p(x,z) = p(x|z)p(z)
-{%endmath%}
-with observed $$x \in \mathcal{X}$$, where $$\mathcal{X}$$ can be continuous, discrete, or latent $$z \in \mathbb{R}^k$$. 
-
-{% marginfigure 'dp1' 'assets/img/faces.png' 'Variational autoencoder $$p(x|z)p(z)$$ applied to a face images (modeled by $$x$$). The learned latent space $$z$$ can be used to interpolate between facial expressions.'%}
-To make things concrete, you may think of $$x$$ as being an image (e.g. a human face), and $$z$$ as latent factors (not seen during training) that explain features of the face. For example, one coordinate of $$z$$ can encode whether the face is happy or sad, another one whether the face is male or female, etc.
-
-We may also be interested in models with many layers, e.g. $$p(x \mid z_1)p(z_2 \mid z_3)\cdots p(z_{m-1}\mid z_m)p(z_m)$$. These are often called *deep generative models* and can learn hierarchies of latent representations.
-In this chapter, we will assume for simplicity that there is only one latent layer.
-
-### Learning deep generative models
-
-Suppose now that we are given a dataset $$D = \{x^1,x^2,...,x^n\}$$. We are interested in the following [inference](../../inference/variational/) and [learning](../../learning/directed/) tasks:
-
-- Learning the parameters $$\theta$$ of $$p$$.
-- Approximate posterior inference over $$z$$: given an image $$x$$, what are its latent factors?
-- Approximate marginal inference over $$x$$: given an image $$x$$ with missing parts, how do we fill-in these parts?
-
-We are also going to make the following additional assumptions
-
-- *Intractability*: computing the posterior probability $$p(z\mid x)$$ is intractable.
-- *Big data*: the dataset $$D$$ is too large to fit in memory; we can only work with small, subsampled batches of $$D$$.
-
-Many interesting models fall in this class; the variational auto-encoder will be one such model.
-
-## Trying out the standard approaches
-
-We have learned several techniques in the class that could be used to solve our three tasks. Let's try them out.
-
-The [EM algorithm](../../learning/latent/) can be used to learn latent-variable models. Recall, however, that performing the E step requires computing the approximate posterior $$p(z\mid x)$$, which we have assumed to be intractable. In the M step, we learn the $$\theta$$ by looking at the entire dataset{%sidenote 1 'Note, however, that there exists a generalization called online EM, which performs the M-step over mini-batches.'%}, which is going to be too large to hold in memory.
-
-To perform approximate inference, we may use [mean field](../../inference/variational/). 
-Recall, however, that one step of mean field requires us to compute an expectation whose time complexity scales exponentially with the size of  the Markov blanket of the target variable. 
-
-What is the size of the [Markov blanket](../../representation/undirected/) for $$z$$? If we assume that at least one component of $$x$$ depends on each component of $$z$$, then this introduces a [V-structure](../../representation/directed/) into the graph of our model (the $$x$$, which are observed, are [explaining away](../../representation/directed/) the differences among the $$z$$). Thus, we know that all the $$z$$ variables will depend on each other and the Markov blanket of some $$z_i$$ will contain all the other $$z$$-variables. This will make mean-field intractable{% sidenote 1 'The authors refer to this when they say "the required integrals for any reasonable mean-field VB algorithm are also intractable". They also discuss the limitations of EM and sampling methods in the introduction and the methods section.'%}. An equivalent (and simpler) explanation is that $$p$$ will contain a factor $$p(x_i \mid z_1,...,z_K)$$, in which all the $$z$$ variables are tied.
-
-Another approach would be to use [sampling-based methods](../../inference/sampling/). In their seminal 2013 [paper](https://arxiv.org/abs/1312.6114) first describing the variational autoencoder, Kingma and Welling compare the VAE against these kinds of algorithms, but they find that these sampling-based methods don't scale well to large datasets. In addition, techniques such as [Metropolis-Hastings](../../inference/sampling/) require a hand-crafted proposal distribution, which might be difficult to choose.
-
 ## Auto-encoding variational Bayes
 
 We will now going to learn about Auto-encoding variational Bayes (AEVB), an algorithm that can efficiently solve our three inference and learning tasks; the variational auto-encoder will be one instantiation of this algorithm. 
