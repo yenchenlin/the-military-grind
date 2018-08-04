@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Variable Elimination</title>
-  <meta name="description" content="Lecture notes for Stanford cs228.">
+  <meta name="description" content="Memories in the military.">
 
 
-  <link rel="stylesheet" href="/cs228-notes/css/tufte.css">	
+  <link rel="stylesheet" href="/the-military-grind/css/tufte.css">	
   
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
@@ -32,17 +32,16 @@
 
   </script>
 
-  <link rel="canonical" href="http://localhost:4000/cs228-notes/inference/ve/">
-  <link rel="alternate" type="application/rss+xml" title="Probabilistic graphical modeling course" href="http://localhost:4000/cs228-notes/feed.xml" />
+  <link rel="canonical" href="/the-military-grind/chap_3/ve/">
+  <link rel="alternate" type="application/rss+xml" title="The Military Grind" href="/the-military-grind/feed.xml" />
 </head>
 
   <body>
     <!--- Header and nav template site-wide -->
 <header>
     <nav class="group">
-        <a href="/cs228-notes/">Contents</a>
-	<a href="http://cs.stanford.edu/~ermon/cs228/index.html">Class</a>
-	<a href="http://github.com/ermongroup/cs228-notes">Github</a>
+        <a href="/the-military-grind/">Contents</a>
+	   <a href="http://yclin.me/">About Me</a>
 	</nav>
 </header>
 
@@ -154,7 +153,7 @@ p(x_1,..,x_n) = \prod_{c \in C} \phi_c(x_c).
 <div class="mathblock"><script type="math/tex; mode=display">
 \tau(x) = \sum_{y} \phi(x, y),
 </script></div>
-<p>where the sum is over all joint assignments to the set of variables <script type="math/tex">Y</script>.<label for="marg" class="margin-toggle">⊕</label><input type="checkbox" id="marg" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/marginalization.png" /><br />Here, we are marginalizing out variable <script type="math/tex">B</script> from factor <script type="math/tex">\phi(A,B,C).</script></span></p>
+<p>where the sum is over all joint assignments to the set of variables <script type="math/tex">Y</script>.<label for="marg" class="margin-toggle">⊕</label><input type="checkbox" id="marg" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/marginalization.png" /><br />Here, we are marginalizing out variable <script type="math/tex">B</script> from factor <script type="math/tex">\phi(A,B,C).</script></span></p>
 
 <p>We use <script type="math/tex">\tau</script> to refer to the marginalized factor. It is important to understand that this factor does not necessarily correspond to a probability distribution, even if <script type="math/tex">\phi</script> was a CPD.</p>
 
@@ -189,7 +188,7 @@ Essentially, we loop over the variables as ordered by <script type="math/tex">O<
 <p>Let’s try to understand what these steps correspond to in our chain example. In that case, the chosen ordering was <script type="math/tex">x_1, x_2, ..., x_{n-1}.</script>
 Starting with <script type="math/tex">x_1</script>, we collected all the factors involving <script type="math/tex">x_1</script>, which were <script type="math/tex">p(x_1)</script> and <script type="math/tex">p(x_2 \mid x_1)</script>. We then used them to construct a new factor <script type="math/tex">\tau(x_2) = \sum_{x_1} p(x_2 \mid x_1) p(x_1)</script>. This can be seen as the results of steps 2 and 3 of the VE algorithm: first we form a large factor <script type="math/tex">\sigma(x_2, x_1) = p(x_2 \mid x_1) p(x_1)</script>; then we eliminate <script type="math/tex">x_1</script> from that factor to produce <script type="math/tex">\tau</script>. Then, we repeat the same procedure for <script type="math/tex">x_2</script>, except that the factors are now <script type="math/tex">p(x_3 \mid x_2), \tau(x_2)</script>.</p>
 
-<p>For a slightly more complex example, recall the graphical model of a student’s grade that we introduced earlier.<label for="nb1" class="margin-toggle">⊕</label><input type="checkbox" id="nb1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/grade-model.png" /><br />Bayes net model of a student’s grade <script type="math/tex">g</script> on an exam; in addition to <script type="math/tex">g</script>, we also model other aspects of the problem, such as the exam’s difficulty <script type="math/tex">d</script>, the student’s intelligence <script type="math/tex">i</script>, his SAT score <script type="math/tex">s</script>, and the quality <script type="math/tex">l</script> of a reference letter from the professor who taught the course. Each variable is binary, except for <script type="math/tex">g</script>, which takes 3 possible values.</span>
+<p>For a slightly more complex example, recall the graphical model of a student’s grade that we introduced earlier.<label for="nb1" class="margin-toggle">⊕</label><input type="checkbox" id="nb1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/grade-model.png" /><br />Bayes net model of a student’s grade <script type="math/tex">g</script> on an exam; in addition to <script type="math/tex">g</script>, we also model other aspects of the problem, such as the exam’s difficulty <script type="math/tex">d</script>, the student’s intelligence <script type="math/tex">i</script>, his SAT score <script type="math/tex">s</script>, and the quality <script type="math/tex">l</script> of a reference letter from the professor who taught the course. Each variable is binary, except for <script type="math/tex">g</script>, which takes 3 possible values.</span>
 The probability specified by the model is of the form</p>
 <div class="mathblock"><script type="math/tex; mode=display">
 p(l, g, i, d, s) = p(l \mid  g) p(s \mid i) p(i) p(g \mid  i, d) p(d).
@@ -247,7 +246,7 @@ P(Y \mid E = e) = \frac{P(Y, E = e)}{P(E=e)},
 
 
     </article>
-    <span class="print-footer">Variable Elimination - Volodymyr Kuleshov</span>
+    <span class="print-footer">Variable Elimination - Yen-Chen Lin</span>
     <footer>
   <hr class="slender">
   <!-- <ul class="footer&#45;links"> -->
@@ -275,7 +274,7 @@ P(Y \mid E = e) = \frac{P(Y, E = e)}{P(E=e)},
   <!--      -->
   <!-- </ul> -->
 <div class="credits">
-<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;VOLODYMYR KULESHOV &#45;&#45;></span></br> <br> -->
+<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;YEN-CHEN LIN &#45;&#45;></span></br> <br> -->
 <span>Site created with <a href="//jekyllrb.com">Jekyll</a> using the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a>. &copy; 2018</span> 
 </div>  
 </footer>

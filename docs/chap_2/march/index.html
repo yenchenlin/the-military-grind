@@ -5,11 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Bayesian networks</title>
-  <meta name="description" content="Lecture notes for Stanford cs228.">
+  <title>行軍</title>
+  <meta name="description" content="Memories in the military.">
 
 
-  <link rel="stylesheet" href="/cs228-notes/css/tufte.css">	
+  <link rel="stylesheet" href="/the-military-grind/css/tufte.css">	
   
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
@@ -32,22 +32,21 @@
 
   </script>
 
-  <link rel="canonical" href="http://localhost:4000/cs228-notes/representation/directed/">
-  <link rel="alternate" type="application/rss+xml" title="Probabilistic graphical modeling course" href="http://localhost:4000/cs228-notes/feed.xml" />
+  <link rel="canonical" href="/the-military-grind/chap_2/march/">
+  <link rel="alternate" type="application/rss+xml" title="The Military Grind" href="/the-military-grind/feed.xml" />
 </head>
 
   <body>
     <!--- Header and nav template site-wide -->
 <header>
     <nav class="group">
-        <a href="/cs228-notes/">Contents</a>
-	<a href="http://cs.stanford.edu/~ermon/cs228/index.html">Class</a>
-	<a href="http://github.com/ermongroup/cs228-notes">Github</a>
+        <a href="/the-military-grind/">Contents</a>
+	   <a href="http://yclin.me/">About Me</a>
 	</nav>
 </header>
 
     <article class="group">
-      <h1>Bayesian networks</h1>
+      <h1>行軍</h1>
 <p class="subtitle"></p>
 
 
@@ -77,7 +76,7 @@
 </script>
 
 
-<p>We begin with the topic of <em>representation</em>: how do we choose a probability distribution to model some interesting aspect of the world? 
+<p>We begin with the topic of <em>representation</em>: how do we choose a probability distribution to model some interesting aspect of the world?
 Coming up with a good model is not always easy: we have seen in the introduction that a naive model for spam classification would require us to specify a number of parameters that is exponential in the number of words in the English language!</p>
 
 <p>In this chapter, we will learn about one way to avoid these kinds of complications.
@@ -102,8 +101,8 @@ We are going to:</p>
 p(x_1,x_2,...,x_n) = p(x_1) p(x_2\mid x_1) \cdots p(x_n\mid x_{n-1},...,x_2,x_1).
 </script></div>
 <p>A compact Bayesian network is a distribution in which each factor on the right hand side depends only on a small number of <em>ancestor variables</em> <script type="math/tex">x_{A_i}</script>:</p>
-<div class="mathblock"><script type="math/tex; mode=display"> 
-p(x_i \mid  x_{i-1}...x_1) = p(x_i \mid  x_{A_i}). 
+<div class="mathblock"><script type="math/tex; mode=display">
+p(x_i \mid  x_{i-1}...x_1) = p(x_i \mid  x_{A_i}).
 </script></div>
 <p>For example, in a model with five variables, we may choose to approximate the factor <span>​<script type="math/tex">p(x_5\mid x_4, x_3, x_2, x_1)</script></span> with <span>​<script type="math/tex">p(x_5 \mid  x_4, x_3)</script></span>. In this case, we write <script type="math/tex">x_{A_5} = \{x_4, x_3\}</script>.</p>
 
@@ -113,7 +112,7 @@ p(x_i \mid  x_{i-1}...x_1) = p(x_i \mid  x_{A_i}).
 
 <p>Distributions of this form can be naturally expressed as <em>directed acyclic graphs</em>, in which vertices correspond to variables <script type="math/tex">x_i</script> and edges indicate dependency relationships. In particular we set the parents of each node to <script type="math/tex">x_i</script> to its ancestors <script type="math/tex">x_{A_i}</script>.</p>
 
-<p>As an example, consider a model of a student’s grade <script type="math/tex">g</script> on an exam; this grade depends on several factors: the exam’s difficulty <script type="math/tex">d</script>, the student’s intelligence <script type="math/tex">i</script>, his SAT score <script type="math/tex">s</script>; it also affects the quality <script type="math/tex">l</script> of the reference letter from the professor who taught the course. Each variable is binary, except for <script type="math/tex">g</script>, which takes 3 possible values.<label for="nb1" class="margin-toggle">⊕</label><input type="checkbox" id="nb1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/grade-model.png" /><br />Bayes net model describing the performance of a student on an exam. The distribution can be represented a product of conditional probability distributions specified by tables. The form of these distributions is described by edges in the graph.</span> The joint probability distribution over the 5 variables naturally factorizes as follows:</p>
+<p>As an example, consider a model of a student’s grade <script type="math/tex">g</script> on an exam; this grade depends on several factors: the exam’s difficulty <script type="math/tex">d</script>, the student’s intelligence <script type="math/tex">i</script>, his SAT score <script type="math/tex">s</script>; it also affects the quality <script type="math/tex">l</script> of the reference letter from the professor who taught the course. Each variable is binary, except for <script type="math/tex">g</script>, which takes 3 possible values.<label for="nb1" class="margin-toggle">⊕</label><input type="checkbox" id="nb1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/grade-model.png" /><br />Bayes net model describing the performance of a student on an exam. The distribution can be represented a product of conditional probability distributions specified by tables. The form of these distributions is described by edges in the graph.</span> The joint probability distribution over the 5 variables naturally factorizes as follows:</p>
 <div class="mathblock"><script type="math/tex; mode=display">
 p(l, g, i, d, s) = p(l \mid  g) p(g \mid  i, d) p(i) p(d) p(s\mid i).
 </script></div>
@@ -142,7 +141,7 @@ Conversely, we can also show by counter-example that when <script type="math/tex
 
 <h2 id="the-dependencies-of-a-bayes-net">The dependencies of a Bayes net</h2>
 
-<p>To summarize, Bayesian networks represent probability distributions that can be formed via products of smaller, local conditional probability distributions (one for each variable). 
+<p>To summarize, Bayesian networks represent probability distributions that can be formed via products of smaller, local conditional probability distributions (one for each variable).
 By expressing a probability in this form, we are introducing into our model assumptions that certain variables are independent.</p>
 
 <p>This raises the question: which independence assumptions are we exactly making by using a model Bayesian network with a given structure described by <script type="math/tex">G</script>?
@@ -157,7 +156,7 @@ This question is important for two reasons: we should know precisely what model 
 <p>For simplicity, let’s start by looking at a Bayes net <script type="math/tex">G</script> with three nodes: <script type="math/tex">A</script>, <script type="math/tex">B</script>, and <script type="math/tex">C</script>. In this case, <script type="math/tex">G</script> essentially has only three possible structures, each of which leads to different independence assumptions. The interested reader can easily prove these results using a bit of algebra.</p>
 
 <ul>
-  <li><label for="bn" class="margin-toggle">⊕</label><input type="checkbox" id="bn" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/3node-bayesnets.png" /><br />Bayesian networks over three variables, encoding different types of dependencies: cascade (a,b), common parent (c), and v-structure (d).</span><em>Common parent.</em> If <script type="math/tex">G</script> is of the form <script type="math/tex">A \leftarrow B \rightarrow C</script>, and <script type="math/tex">B</script> is observed, then <span>​<script type="math/tex">A \perp C \mid  B</script></span>. However, if <script type="math/tex">B</script> is unobserved, then <script type="math/tex">A \not\perp C</script>. Intuitively this stems from the fact that <script type="math/tex">B</script> contains all the information that determines the outcomes of <script type="math/tex">A</script> and <script type="math/tex">C</script>; once it is observed, there is nothing else that affects these variables’ outcomes.</li>
+  <li><label for="bn" class="margin-toggle">⊕</label><input type="checkbox" id="bn" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/3node-bayesnets.png" /><br />Bayesian networks over three variables, encoding different types of dependencies: cascade (a,b), common parent (c), and v-structure (d).</span><em>Common parent.</em> If <script type="math/tex">G</script> is of the form <script type="math/tex">A \leftarrow B \rightarrow C</script>, and <script type="math/tex">B</script> is observed, then <span>​<script type="math/tex">A \perp C \mid  B</script></span>. However, if <script type="math/tex">B</script> is unobserved, then <script type="math/tex">A \not\perp C</script>. Intuitively this stems from the fact that <script type="math/tex">B</script> contains all the information that determines the outcomes of <script type="math/tex">A</script> and <script type="math/tex">C</script>; once it is observed, there is nothing else that affects these variables’ outcomes.</li>
   <li><em>Cascade</em>: If <script type="math/tex">G</script> equals <script type="math/tex">A \rightarrow B \rightarrow C</script>, and <script type="math/tex">B</script> is again observed, then, again <span>​<script type="math/tex">A \perp C \mid  B</script></span>. However, if <script type="math/tex">B</script> is unobserved, then <script type="math/tex">A \not\perp C</script>. Here, the intuition is again that <script type="math/tex">B</script> holds all the information that determines the outcome of <script type="math/tex">C</script>; thus, it does not matter what value <script type="math/tex">A</script> takes.</li>
   <li><em>V-structure</em> (also known as <em>explaining away</em>): If <script type="math/tex">G</script> is <script type="math/tex">A \rightarrow C \leftarrow B</script>, then knowing <script type="math/tex">C</script> couples <script type="math/tex">A</script> and <script type="math/tex">B</script>. In other words, <script type="math/tex">A \perp B</script> if <script type="math/tex">C</script> is unobserved, but <span>​<script type="math/tex">A \not\perp B \mid  C</script></span> if <script type="math/tex">C</script> is observed.</li>
 </ul>
@@ -173,7 +172,7 @@ This question is important for two reasons: we should know precisely what model 
   <li><script type="math/tex">X \rightarrow Y \rightarrow Z</script>, and <script type="math/tex">Y</script> is unobserved <script type="math/tex">Y \not\in O</script></li>
   <li><script type="math/tex">X \leftarrow Y \rightarrow Z</script>, and <script type="math/tex">Y</script> is unobserved <script type="math/tex">Y \not\in O</script></li>
   <li><script type="math/tex">X \rightarrow Y \leftarrow Z</script>, and <script type="math/tex">Y</script> or any of its descendents are observed.
-<label for="dp2" class="margin-toggle">⊕</label><input type="checkbox" id="dp2" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/dsep2.png" /><br />In this example, <script type="math/tex">X_1</script> and <script type="math/tex">X_6</script> are <script type="math/tex">d</script>-separated given <script type="math/tex">X_2, X_3</script>.</span><label for="dp1" class="margin-toggle">⊕</label><input type="checkbox" id="dp1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/dsep1.png" /><br />However, <script type="math/tex">X_2, X_3</script> are not <script type="math/tex">d</script>-separated given <script type="math/tex">X_1, X_6</script>. There is an active pass which passed through the V-structure created when <script type="math/tex">X_6</script> is observed.</span></li>
+<label for="dp2" class="margin-toggle">⊕</label><input type="checkbox" id="dp2" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/dsep2.png" /><br />In this example, <script type="math/tex">X_1</script> and <script type="math/tex">X_6</script> are <script type="math/tex">d</script>-separated given <script type="math/tex">X_2, X_3</script>.</span><label for="dp1" class="margin-toggle">⊕</label><input type="checkbox" id="dp1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/dsep1.png" /><br />However, <script type="math/tex">X_2, X_3</script> are not <script type="math/tex">d</script>-separated given <script type="math/tex">X_1, X_6</script>. There is an active pass which passed through the V-structure created when <script type="math/tex">X_6</script> is observed.</span></li>
 </ul>
 
 <p>For example, in the graph below, <script type="math/tex">X_1</script> and <script type="math/tex">X_6</script> are <script type="math/tex">d</script>-separated given <script type="math/tex">X_2, X_3</script>. However, <script type="math/tex">X_2, X_3</script> are not <script type="math/tex">d</script>-separated given <script type="math/tex">X_1, X_6</script>, because we can find an active path <script type="math/tex">(X_2, X_6, X_5, X_3)</script></p>
@@ -194,7 +193,7 @@ If <script type="math/tex">p</script> factorizes over <script type="math/tex">G<
 
 <p>This raises our last and perhaps most important question: can directed graphs express all the independencies of any distribution <script type="math/tex">p</script>? More formally, given a distribution <script type="math/tex">p</script>, can we construct a graph <script type="math/tex">G</script> such that <script type="math/tex">I(G) = I(p)</script>?</p>
 
-<p>First, note that it is very easy to construct a <script type="math/tex">G</script> such that <script type="math/tex">I(G) \subseteq I(p)</script>. A fully connected DAG <script type="math/tex">G</script> is an I-map for any distribution since <script type="math/tex">I(G) = \emptyset</script>. <label for="dp1" class="margin-toggle">⊕</label><input type="checkbox" id="dp1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/full-bayesnet.png" /><br />A fully connected Bayesian network over four variables. There are no independencies in this model, and it is an I-map for any distribution.</span></p>
+<p>First, note that it is very easy to construct a <script type="math/tex">G</script> such that <script type="math/tex">I(G) \subseteq I(p)</script>. A fully connected DAG <script type="math/tex">G</script> is an I-map for any distribution since <script type="math/tex">I(G) = \emptyset</script>. <label for="dp1" class="margin-toggle">⊕</label><input type="checkbox" id="dp1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/full-bayesnet.png" /><br />A fully connected Bayesian network over four variables. There are no independencies in this model, and it is an I-map for any distribution.</span></p>
 
 <p>A more interesting question is can we find a <em>minimal</em> <script type="math/tex">I</script>-map <script type="math/tex">G</script> for <script type="math/tex">p</script>, i.e. an <script type="math/tex">I</script>-map <script type="math/tex">G</script> such that the removal of even a single edge from <script type="math/tex">G</script> will result in it no longer being an <script type="math/tex">I</script>-map. This is quite easy: we may start with a fully connected <script type="math/tex">G</script> and remove edges until <script type="math/tex">G</script> is no longer an <script type="math/tex">I</script>-map. One way to do this is by following the natural topological ordering of the graph, and removing node ancestors until this is no longer possible; we will revisit this pruning method towards the end of course when performing structure learning.</p>
 
@@ -203,7 +202,7 @@ If <script type="math/tex">p</script> factorizes over <script type="math/tex">G<
 <p>A related question is whether perfect maps are unique when they exist. Again, this is not the case, as <script type="math/tex">X \rightarrow Y</script> and <script type="math/tex">X \leftarrow Y</script> encode the same independencies, yet form different graphs. More generally, we say that two Bayes nets <script type="math/tex">G_1, G_2</script> are I-equivalent if they encode the same dependencies <script type="math/tex">I(G_1) = I(G_2)</script>.</p>
 
 <p>When are two Bayesian nets I-equivalent? To answer this, let’s return to a simple example with three variables. We say that each of the graphs below have the same <em>skeleton</em>, meaning that if we drop the directionality of the arrows, we obtain the same undirected graph in each case.</p>
-<figure><figcaption>Bayesian networks over three variables</figcaption><img src="/cs228-notes/assets/img/3node-bayesnets.png" /></figure>
+<figure><figcaption>Bayesian networks over three variables</figcaption><img src="/the-military-grind/assets/img/3node-bayesnets.png" /></figure>
 <p>The cascade-type structures (a,b) are clearly symmetric and the directionality of arrows does not matter. In fact, (a,b,c) encode exactly the same dependencies. We can change the directions of the arrows as long as we don’t turn them into a V-structure (d). When we do have a V-structure, however, we cannot change any arrows: structure (d) is the only one that describes the dependency <script type="math/tex">X \not\perp Y \mid Z</script>. These examples provide intuitions of the following general results on I-equivalence.</p>
 
 <p><strong>Fact:</strong>
@@ -226,7 +225,7 @@ If <script type="math/tex">G,G'</script> have the same skeleton and the same v-s
 
 
     </article>
-    <span class="print-footer">Bayesian networks - Volodymyr Kuleshov</span>
+    <span class="print-footer">行軍 - Yen-Chen Lin</span>
     <footer>
   <hr class="slender">
   <!-- <ul class="footer&#45;links"> -->
@@ -254,7 +253,7 @@ If <script type="math/tex">G,G'</script> have the same skeleton and the same v-s
   <!--      -->
   <!-- </ul> -->
 <div class="credits">
-<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;VOLODYMYR KULESHOV &#45;&#45;></span></br> <br> -->
+<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;YEN-CHEN LIN &#45;&#45;></span></br> <br> -->
 <span>Site created with <a href="//jekyllrb.com">Jekyll</a> using the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a>. &copy; 2018</span> 
 </div>  
 </footer>

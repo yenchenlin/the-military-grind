@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>The variational auto-encoder</title>
-  <meta name="description" content="Lecture notes for Stanford cs228.">
+  <meta name="description" content="Memories in the military.">
 
 
-  <link rel="stylesheet" href="/cs228-notes/css/tufte.css">	
+  <link rel="stylesheet" href="/the-military-grind/css/tufte.css">	
   
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
@@ -32,17 +32,16 @@
 
   </script>
 
-  <link rel="canonical" href="http://localhost:4000/cs228-notes/extras/vae/">
-  <link rel="alternate" type="application/rss+xml" title="Probabilistic graphical modeling course" href="http://localhost:4000/cs228-notes/feed.xml" />
+  <link rel="canonical" href="/the-military-grind/extras/vae/">
+  <link rel="alternate" type="application/rss+xml" title="The Military Grind" href="/the-military-grind/feed.xml" />
 </head>
 
   <body>
     <!--- Header and nav template site-wide -->
 <header>
     <nav class="group">
-        <a href="/cs228-notes/">Contents</a>
-	<a href="http://cs.stanford.edu/~ermon/cs228/index.html">Class</a>
-	<a href="http://github.com/ermongroup/cs228-notes">Github</a>
+        <a href="/the-military-grind/">Contents</a>
+	   <a href="http://yclin.me/">About Me</a>
 	</nav>
 </header>
 
@@ -92,7 +91,7 @@ p(x,z) = p(x|z)p(z)
 </script></div>
 <p>with observed <script type="math/tex">x \in \mathcal{X}</script>, where <script type="math/tex">\mathcal{X}</script> can be continuous, discrete, or latent <script type="math/tex">z \in \mathbb{R}^k</script>.</p>
 
-<p><label for="dp1" class="margin-toggle">⊕</label><input type="checkbox" id="dp1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/faces.png" /><br />Variational autoencoder <script type="math/tex">p(x|z)p(z)</script> applied to a face images (modeled by <script type="math/tex">x</script>). The learned latent space <script type="math/tex">z</script> can be used to interpolate between facial expressions.</span>
+<p><label for="dp1" class="margin-toggle">⊕</label><input type="checkbox" id="dp1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/faces.png" /><br />Variational autoencoder <script type="math/tex">p(x|z)p(z)</script> applied to a face images (modeled by <script type="math/tex">x</script>). The learned latent space <script type="math/tex">z</script> can be used to interpolate between facial expressions.</span>
 To make things concrete, you may think of <script type="math/tex">x</script> as being an image (e.g. a human face), and <script type="math/tex">z</script> as latent factors (not seen during training) that explain features of the face. For example, one coordinate of <script type="math/tex">z</script> can encode whether the face is happy or sad, another one whether the face is male or female, etc.</p>
 
 <p>We may also be interested in models with many layers, e.g. <script type="math/tex">p(x \mid z_1)p(z_2 \mid z_3)\cdots p(z_{m-1}\mid z_m)p(z_m)</script>. These are often called <em>deep generative models</em> and can learn hierarchies of latent representations.
@@ -281,7 +280,7 @@ p(z) & = \mathcal{N}(z; 0, I),
 
 <h3 id="experimental-results">Experimental results</h3>
 
-<p><label for="dp1" class="margin-toggle">⊕</label><input type="checkbox" id="dp1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/mnist.png" /><br />Interpolating over MNIST digits by interpolating over latent variables</span>
+<p><label for="dp1" class="margin-toggle">⊕</label><input type="checkbox" id="dp1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/mnist.png" /><br />Interpolating over MNIST digits by interpolating over latent variables</span>
 The VAE can be applied to images <script type="math/tex">x</script> in order to learn interesting latent representations. The VAE paper contains a few examples on the Frey face dataset on the MNIST digits. On the face dataset, we can interpolate between facial expressions by interpolating between latent variables (e.g. we can generate smooth transitions between “angry” and “surprised”). On the MNIST dataset, we can similarly interpolate between numbers.</p>
 
 <p>The authors also compare their methods against three alternative approaches: the wake-sleep algorithm, Monte-Carlo EM, and hybrid Monte-Carlo. The latter two methods are sampling-based approaches; they are quite accurate, but don’t scale well to large datasets. Wake-sleep is a variational inference algorithm that scales much better; however it does not use the exact gradient of the ELBO (it uses an approximation), and hence it is not as accurate as AEVB. The paper illustrates this by plotting learning curves.</p>
@@ -301,7 +300,7 @@ The VAE can be applied to images <script type="math/tex">x</script> in order to 
 
 
     </article>
-    <span class="print-footer">The variational auto-encoder - Volodymyr Kuleshov</span>
+    <span class="print-footer">The variational auto-encoder - Yen-Chen Lin</span>
     <footer>
   <hr class="slender">
   <!-- <ul class="footer&#45;links"> -->
@@ -329,7 +328,7 @@ The VAE can be applied to images <script type="math/tex">x</script> in order to 
   <!--      -->
   <!-- </ul> -->
 <div class="credits">
-<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;VOLODYMYR KULESHOV &#45;&#45;></span></br> <br> -->
+<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;YEN-CHEN LIN &#45;&#45;></span></br> <br> -->
 <span>Site created with <a href="//jekyllrb.com">Jekyll</a> using the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a>. &copy; 2018</span> 
 </div>  
 </footer>

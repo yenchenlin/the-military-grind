@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>MAP inference</title>
-  <meta name="description" content="Lecture notes for Stanford cs228.">
+  <meta name="description" content="Memories in the military.">
 
 
-  <link rel="stylesheet" href="/cs228-notes/css/tufte.css">	
+  <link rel="stylesheet" href="/the-military-grind/css/tufte.css">	
   
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
@@ -32,17 +32,16 @@
 
   </script>
 
-  <link rel="canonical" href="http://localhost:4000/cs228-notes/inference/map/">
-  <link rel="alternate" type="application/rss+xml" title="Probabilistic graphical modeling course" href="http://localhost:4000/cs228-notes/feed.xml" />
+  <link rel="canonical" href="/the-military-grind/chap_3/map/">
+  <link rel="alternate" type="application/rss+xml" title="The Military Grind" href="/the-military-grind/feed.xml" />
 </head>
 
   <body>
     <!--- Header and nav template site-wide -->
 <header>
     <nav class="group">
-        <a href="/cs228-notes/">Contents</a>
-	<a href="http://cs.stanford.edu/~ermon/cs228/index.html">Class</a>
-	<a href="http://github.com/ermongroup/cs228-notes">Github</a>
+        <a href="/the-military-grind/">Contents</a>
+	   <a href="http://yclin.me/">About Me</a>
 	</nav>
 </header>
 
@@ -108,13 +107,13 @@ clause <script type="math/tex">c</script>, and <script type="math/tex">\theta_c 
 \arg \max_y \log p(y|x) =  \arg \max_y \sum_c \theta_c(\bfy_c, \bfx_c).
 </script></div>
 
-<p><label for="ocr" class="margin-toggle">⊕</label><input type="checkbox" id="ocr" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/ocr.png" /><br />Chain-structured conditional random field for optical character recognition.</span>
+<p><label for="ocr" class="margin-toggle">⊕</label><input type="checkbox" id="ocr" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/ocr.png" /><br />Chain-structured conditional random field for optical character recognition.</span>
 We discussed structured prediction in detail when we covered CRFs.
 Recall that our main example was handwriting recognition, in which we are given 
 images <script type="math/tex">x_i \in [0, 1]^{d\times d}</script> of characters in the form of pixel matrices; MAP inference in this setting amounts to jointly recognizing the most likely word <script type="math/tex">(y_i)_{i=1}^n</script> encoded by the images.</p>
 
 <p>Another example of MAP inference is image segmentation; here, we are interested in locating an entity in an image and label all its pixels. Our input <script type="math/tex">\bfx \in [0, 1]^{d\times d}</script> is a matrix of image pixels, and our task is to predict the label <script type="math/tex">y \in \{0, 1\}^{d\times d}</script>, indicating whether each pixel encodes the object we want to recover. Intuitively, neighboring pixels should have similar values in <script type="math/tex">\bfy</script>, i.e. pixels associated with the horse should form one continuous blob (rather than white noise).
-<label for="ocr" class="margin-toggle">⊕</label><input type="checkbox" id="ocr" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/imagesegmentation.png" /><br />An illustration of the image segmentation problem.</span></p>
+<label for="ocr" class="margin-toggle">⊕</label><input type="checkbox" id="ocr" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/imagesegmentation.png" /><br />An illustration of the image segmentation problem.</span></p>
 
 <p>This prior knowledge can be naturally modeled in the language of graphical models via a <a href="https://en.wikipedia.org/wiki/Potts_model">Potts model</a>. As in our first example, we can introduce potentials <script type="math/tex">\phi(y_i,x)</script> that encode the likelihood that any given pixel is from our subject. We then augment them with pairwise potentials <script type="math/tex">\phi(y_i, y_j )</script> for neighboring <script type="math/tex">y_i, y_j</script>, which will encourage adjacent <script type="math/tex">y</script>’s to have the same value with higher probability.</p>
 
@@ -134,7 +133,7 @@ E_{uv}(x_u, x_v) =
 <p>where <script type="math/tex">\lambda_{st} \geq 0</script> is a cost that penalizes edge mismatches.
 Assume also that nodes have unary potentials; we can always normalize the nodes’ energies so that <script type="math/tex">E_u(1) = 0</script> or <script type="math/tex">E_u(0) = 0</script> and <script type="math/tex">E_u \geq 0</script>.</p>
 
-<p><label for="mincut" class="margin-toggle">⊕</label><input type="checkbox" id="mincut" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/mincut.png" /><br />Formulating the segmentation task in a 2x2 MRF as a graph cut problem. Dashed edges are part of the min-cut. (Source: Machine Learning: A Probabilistic Perspective).</span>
+<p><label for="mincut" class="margin-toggle">⊕</label><input type="checkbox" id="mincut" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/mincut.png" /><br />Formulating the segmentation task in a 2x2 MRF as a graph cut problem. Dashed edges are part of the min-cut. (Source: Machine Learning: A Probabilistic Perspective).</span>
 The motivation for this model comes from image segmentation. We are looking for an assignment that minimizes the energy, which (among other things) tries to reduce discordance between adjacent variables.</p>
 
 <p>We can formulate energy minimization in this type of model as a min-cut problem in an augmented graph <script type="math/tex">G'</script>:
@@ -326,7 +325,7 @@ L(\bar \delta) =  \sum_{i \in V} \bar \theta_{i}^{\bar\delta} (\bar x_i) + \sum_
 
 
     </article>
-    <span class="print-footer">MAP inference - Volodymyr Kuleshov</span>
+    <span class="print-footer">MAP inference - Yen-Chen Lin</span>
     <footer>
   <hr class="slender">
   <!-- <ul class="footer&#45;links"> -->
@@ -354,7 +353,7 @@ L(\bar \delta) =  \sum_{i \in V} \bar \theta_{i}^{\bar\delta} (\bar x_i) + \sum_
   <!--      -->
   <!-- </ul> -->
 <div class="credits">
-<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;VOLODYMYR KULESHOV &#45;&#45;></span></br> <br> -->
+<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;YEN-CHEN LIN &#45;&#45;></span></br> <br> -->
 <span>Site created with <a href="//jekyllrb.com">Jekyll</a> using the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a>. &copy; 2018</span> 
 </div>  
 </footer>

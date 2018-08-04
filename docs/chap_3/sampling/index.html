@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Sampling methods</title>
-  <meta name="description" content="Lecture notes for Stanford cs228.">
+  <meta name="description" content="Memories in the military.">
 
 
-  <link rel="stylesheet" href="/cs228-notes/css/tufte.css">	
+  <link rel="stylesheet" href="/the-military-grind/css/tufte.css">	
   
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
@@ -32,17 +32,16 @@
 
   </script>
 
-  <link rel="canonical" href="http://localhost:4000/cs228-notes/inference/sampling/">
-  <link rel="alternate" type="application/rss+xml" title="Probabilistic graphical modeling course" href="http://localhost:4000/cs228-notes/feed.xml" />
+  <link rel="canonical" href="/the-military-grind/chap_3/sampling/">
+  <link rel="alternate" type="application/rss+xml" title="The Military Grind" href="/the-military-grind/feed.xml" />
 </head>
 
   <body>
     <!--- Header and nav template site-wide -->
 <header>
     <nav class="group">
-        <a href="/cs228-notes/">Contents</a>
-	<a href="http://cs.stanford.edu/~ermon/cs228/index.html">Class</a>
-	<a href="http://github.com/ermongroup/cs228-notes">Github</a>
+        <a href="/the-military-grind/">Contents</a>
+	   <a href="http://yclin.me/">About Me</a>
 	</nav>
 </header>
 
@@ -91,11 +90,11 @@
 All sampling techniques involve calling some kind of simple subroutine multiple times in a clever way.</p>
 
 <p>In our case, we may reduce sampling from a multinomial variable to sampling a single uniform variable by subdividing a unit interval into <script type="math/tex">k</script> regions with region <script type="math/tex">i</script> having size <script type="math/tex">\theta_i</script>. We then sample uniformly from <script type="math/tex">[0,1]</script> and return the value of the region in which our sample falls.</p>
-<figure><figcaption>Reducing sampling from a multinomial distribution to sampling a uniform distribution in [0,1].</figcaption><img src="/cs228-notes/assets/img/multinomial-sampling.png" /></figure>
+<figure><figcaption>Reducing sampling from a multinomial distribution to sampling a uniform distribution in [0,1].</figcaption><img src="/the-military-grind/assets/img/multinomial-sampling.png" /></figure>
 
 <h3 id="sampling-from-directed-graphical-models">Sampling from directed graphical models</h3>
 
-<p><label for="nb1" class="margin-toggle">⊕</label><input type="checkbox" id="nb1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/grade-model.png" /><br />Bayes net model describing the performance of a student on an exam. The distribution can be represented a product of conditional probability distributions specified by tables.</span></p>
+<p><label for="nb1" class="margin-toggle">⊕</label><input type="checkbox" id="nb1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/grade-model.png" /><br />Bayes net model describing the performance of a student on an exam. The distribution can be represented a product of conditional probability distributions specified by tables.</span></p>
 
 <p>Our technique for sampling from multinomials naturally extends to Bayesian networks with multinomial variables, via a method called <em>ancestral</em> (or <em>forward</em>) sampling. Given a probability <script type="math/tex">p(x_1,...,x_n)</script> specified by a Bayes net, we sample variables in topological order. In other words, we start by sampling the variables with no parents; then we sample from the next generation by conditioning these variables’ CPDs to values sampled at the first step. We proceed like this until the <script type="math/tex">n</script> variables have been sampled.</p>
 
@@ -122,7 +121,7 @@ This technique approximates a target expectation with</p>
 
 <h3 id="rejection-sampling">Rejection sampling</h3>
 
-<p><label for="nb1" class="margin-toggle">⊕</label><input type="checkbox" id="nb1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/rejection-sampling.png" /><br />Graphical illustration of rejection sampling. We may compute the area of circle by drawing uniform samples from the square; the fraction of points that fall in the circle represents its area. This method breaks down if the size of the circle is small relative to the size of the square.</span>
+<p><label for="nb1" class="margin-toggle">⊕</label><input type="checkbox" id="nb1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/rejection-sampling.png" /><br />Graphical illustration of rejection sampling. We may compute the area of circle by drawing uniform samples from the square; the fraction of points that fall in the circle represents its area. This method breaks down if the size of the circle is small relative to the size of the square.</span>
 A special case of Monte Carlo integration is rejection sampling. We may use it to compute the area of a region <script type="math/tex">R</script> by sampling in a larger region with a known area and recording the fraction of samples that falls within <script type="math/tex">R</script>.</p>
 
 <p>For example, we may use rejection sampling to compute marginal probabilities of the form <script type="math/tex">p(x=x')</script>: we may write this probability as <script type="math/tex">\Exp_{x\sim p}[\Ind(x=x')]</script> and then take the Monte Carlo approximation. This will amount to sampling many samples from <script type="math/tex">p</script> and keeping ones that are consistent with the value of the marginal.</p>
@@ -199,7 +198,7 @@ We will solve these problems using a very powerful technique called Markov chain
 
 <p>The probability <script type="math/tex">P(S_i \mid S_{i-1})</script> is the same at every step <script type="math/tex">i</script>; this means that the transition probabilities at any time in the entire process depend only on the given state and not on the history of how we got there. This is called the <em>Markov</em> assumption.</p>
 
-<p><label for="mc" class="margin-toggle">⊕</label><input type="checkbox" id="mc" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/cs228-notes/assets/img/markovchain.png" /><br />A Markov chain over three states. The weighted directed edges indicate probabilities of transitioning to a different state.</span>
+<p><label for="mc" class="margin-toggle">⊕</label><input type="checkbox" id="mc" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/markovchain.png" /><br />A Markov chain over three states. The weighted directed edges indicate probabilities of transitioning to a different state.</span>
 It is very convenient to represent the transition probability as a <script type="math/tex">d \times d</script> matrix</p>
 <div class="mathblock"><script type="math/tex; mode=display">
 T_{ij} = P(S_\text{new} = i \mid S_\text{prev} = j).
@@ -231,7 +230,7 @@ p_t = T^t p_0,
 </ul>
 
 <p>The first condition is meant to prevent <em>absorbing states</em>, i.e. states from which we can never leave. In the example below, if we start in states <script type="math/tex">1,2</script>, we will never reach state 4. Conversely, if we start in state 4, then we will never reach states 1,2. If we start the chain in the middle (in state 3), then clearly it cannot have a single limiting distribution.</p>
-<figure><figcaption>A reducible Markov Chain over four states.</figcaption><img src="/cs228-notes/assets/img/reducible-chain.png" /></figure>
+<figure><figcaption>A reducible Markov Chain over four states.</figcaption><img src="/the-military-grind/assets/img/reducible-chain.png" /></figure>
 
 <p>The second condition is necessary to rule out transition operators such as</p>
 <div class="mathblock"><script type="math/tex; mode=display">
@@ -361,7 +360,7 @@ T = \left[
 
 
     </article>
-    <span class="print-footer">Sampling methods - Volodymyr Kuleshov</span>
+    <span class="print-footer">Sampling methods - Yen-Chen Lin</span>
     <footer>
   <hr class="slender">
   <!-- <ul class="footer&#45;links"> -->
@@ -389,7 +388,7 @@ T = \left[
   <!--      -->
   <!-- </ul> -->
 <div class="credits">
-<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;VOLODYMYR KULESHOV &#45;&#45;></span></br> <br> -->
+<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;YEN-CHEN LIN &#45;&#45;></span></br> <br> -->
 <span>Site created with <a href="//jekyllrb.com">Jekyll</a> using the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a>. &copy; 2018</span> 
 </div>  
 </footer>

@@ -5,11 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Contents</title>
-  <meta name="description" content="Lecture notes for Stanford cs228.">
+  <title>The Military Grind</title>
+  <meta name="description" content="Memories in the military.">
 
 
-  <link rel="stylesheet" href="/cs228-notes/css/tufte.css">	
+  <link rel="stylesheet" href="/the-military-grind/css/tufte.css">	
   
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
@@ -32,22 +32,21 @@
 
   </script>
 
-  <link rel="canonical" href="http://localhost:4000/cs228-notes/">
-  <link rel="alternate" type="application/rss+xml" title="Probabilistic graphical modeling course" href="http://localhost:4000/cs228-notes/feed.xml" />
+  <link rel="canonical" href="/the-military-grind/">
+  <link rel="alternate" type="application/rss+xml" title="The Military Grind" href="/the-military-grind/feed.xml" />
 </head>
 
   <body>
     <!--- Header and nav template site-wide -->
 <header>
     <nav class="group">
-        <a href="/cs228-notes/">Contents</a>
-	<a href="http://cs.stanford.edu/~ermon/cs228/index.html">Class</a>
-	<a href="http://github.com/ermongroup/cs228-notes">Github</a>
+        <a href="/the-military-grind/">Contents</a>
+	   <a href="http://yclin.me/">About Me</a>
 	</nav>
 </header>
 
     <article class="group">
-      <h1>Contents</h1>
+      <h1>The military grind</h1>
 <p class="subtitle"></p>
 
 
@@ -77,94 +76,65 @@
 </script>
 
 
-<p><span class="newthought">These notes</span>  form a concise introductory course on probabilistic graphical models<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle" /><span class="sidenote">Probabilistic graphical models are a subfield of machine learning that studies how to describe and reason about the world in terms of probabilities. </span>.
-They are based on Stanford <a href="http://cs.stanford.edu/~ermon/cs228/index.html">CS228</a>, and are written by <a href="http://www.stanford.edu/~kuleshov">Volodymyr Kuleshov</a> and <a href="http://cs.stanford.edu/~ermon/">Stefano Ermon</a>, with the <a href="https://github.com/ermongroup/cs228-notes/commits/master">help</a> of many students and course staff.
-<label for="mn-id-whatever" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-id-whatever" class="margin-toggle" /><span class="marginnote">The notes are still <strong>under construction</strong>!
-Although we have written up most of the material, you will probably find several typos. If you do, please let us know, or submit a pull request with your fixes to our <a href="https://github.com/ermongroup/cs228-notes">Github repository</a>. </span>
-You too may help make these notes better by submitting your improvements to us via <a href="https://github.com/ermongroup/cs228-notes">Github</a>.</p>
+<p><span class="newthought">謹</span>  以此書記錄我在中華民國陸軍服役時<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle" /><span class="sidenote">服役日期: 2018/04/19-2018/08/03. </span><label for="mn-id-whatever" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-id-whatever" class="margin-toggle" /><span class="marginnote">剛入伍時被剃成光頭的我: <img src="https://user-images.githubusercontent.com/7057863/40884275-363cf80a-6743-11e8-83e3-1dabf5c11287.png" width="200" />
+ </span>這段 “不後悔走過但絕不想重來一遍” 的荒謬歲月.</p>
 
-<p>This course starts by introducing probabilistic graphical models from the very basics and concludes by explaining from first principles the <a href="extras/vae">variational auto-encoder</a>, an important probabilistic model that is also one of the most influential recent results in deep learning.</p>
+<h2 id="section">1-5 週: 新兵訓練</h2>
 
-<h2 id="preliminaries">Preliminaries</h2>
+<!--1. [通往地獄的高速公路](chap_1/highway_to_hell/):
+ 
+2. [懇親](chap_1/probabilityreview):
 
-<ol>
-  <li>
-    <p><a href="preliminaries/introduction/">Introduction</a>: What is probabilistic graphical modeling? Overview of the course.</p>
-  </li>
-  <li>
-    <p><a href="preliminaries/probabilityreview">Review of probability theory</a>: Probability distributions. Conditional probability. Random variables (<em>under construction</em>).</p>
-  </li>
-  <li>
-    <p><a href="preliminaries/applications">Examples of real-world applications</a>: Image denoising. RNA structure prediction. Syntactic analysis of sentences. Optical character recognition (<em>under construction</em>).</p>
-  </li>
-</ol>
-
-<h2 id="representation">Representation</h2>
+3. [鑑測](chap_1/applications):-->
 
 <ol>
   <li>
-    <p><a href="representation/directed/">Bayesian networks</a>: Definitions. Representations via directed graphs. Independencies in directed models.</p>
+    <p><a href="chap_1/myth_buster/">流言終結者-新訓篇</a></p>
   </li>
   <li>
-    <p><a href="representation/undirected/">Markov random fields</a>: Undirected vs directed models. Independencies in undirected models. Conditional random fields.</p>
+    <p><a href="chap_1/highway_to_hell/"><span style="color:DarkRed">第 1 堂課: 別把自己的價值定義在不能控制的人事物之上</span></a></p>
   </li>
 </ol>
 
-<h2 id="inference">Inference</h2>
+<h2 id="section-1">6-10 週: 二階段訓</h2>
 
-<ol>
-  <li>
-    <p><a href="inference/ve/">Variable elimination</a> The inference problem. Variable elimination. Complexity of inference.</p>
-  </li>
-  <li>
-    <p><a href="inference/jt/">Belief propagation</a>: The junction tree algorithm. Exact inference in arbitrary graphs. Loopy Belief Propagation.</p>
-  </li>
-  <li>
-    <p><a href="inference/map/">MAP inference</a>: Max-sum message passing. Graphcuts. Linear programming relaxations. Dual decomposition.</p>
-  </li>
-  <li>
-    <p><a href="inference/sampling/">Sampling-based inference</a>: Monte-Carlo sampling. Importance sampling. Markov Chain Monte-Carlo. Applications in inference.</p>
-  </li>
-  <li>
-    <p><a href="inference/variational/">Variational inference</a>: Variational lower bounds. Mean Field. Marginal polytope and its relaxations.</p>
-  </li>
-</ol>
+<!--1. [全休](chap_2/directed/):
 
-<h2 id="learning">Learning</h2>
+2. [圖書館 or 健身房?](chap_2/library_or_gym/):
 
-<ol>
-  <li>
-    <p><a href="learning/directed/">Learning in directed models</a>: Maximum likelihood estimation. Learning theory basics. Maximum likelihood estimators for Bayesian networks.</p>
-  </li>
-  <li>
-    <p><a href="learning/undirected/">Learning in undirected models</a>: Exponential families. Maximum likelihood estimation with gradient descent. Learning in CRFs</p>
-  </li>
-  <li>
-    <p><a href="learning/latent/">Learning in latent variable models</a>: Latent variable models. Gaussian mixture models. Expectation maximization.</p>
-  </li>
-  <li>
-    <p><a href="learning/bayesianlearning/">Bayesian learning</a>: Bayesian paradigm. Conjugate priors. Examples (<em>under construction</em>).</p>
-  </li>
-  <li>
-    <p><a href="learning/structLearn/">Structure learning</a>: Chow-Liu algorithm. Akaike information criterion. Bayesian information criterion. Bayesian structure learning (<em>under construction</em>).</p>
-  </li>
-</ol>
+3. [饒舌](chap_2/undirected/):-->
 
-<h2 id="bringing-it-all-together">Bringing it all together</h2>
+<!--4. [流言終結者: 二階段篇](chap_1/highway_to_hell/) 
 
-<ol>
-  <li>
-    <p><a href="extras/vae">The variational autoencoder</a>: Deep generative models. The reparametrization trick. Learning latent visual representations.</p>
-  </li>
-  <li>
-    <p><a href="extras/readings">List of further readings</a>: Structured support vector machines. Bayesian non-parametrics.</p>
-  </li>
-</ol>
+5. [<span style="color:DarkRed">第 2 堂課: 做選擇前, 觀察自己最能忍受哪一種痛苦而不是只看最喜歡哪一種結果</span>](chap_1/highway_to_hell/)-->
+
+<h2 id="section-2">11-15 週: 老兵八字輕</h2>
+
+<!--1. [軍官考試](chap_3/ve/):
+
+2. [捲菸](chap_3/jt/):
+
+3. [轉診](chap_3/sampling/):
+
+4. [星夜呢喃](chap_3/variational/):
+
+5. [頭也不回](chap_3/variational/):-->
+
+<!--## 體會
+
+1. [The variational autoencoder](extras/vae): Deep generative models. The reparametrization trick. Learning latent visual representations.
+
+
+## 附錄 1: 笑話
+
+## 附錄 2: 當兵時閱讀的書
+-->
+
 
 
 
     </article>
-    <span class="print-footer">Contents - Volodymyr Kuleshov</span>
+    <span class="print-footer">The Military Grind - Yen-Chen Lin</span>
     <footer>
   <hr class="slender">
   <!-- <ul class="footer&#45;links"> -->
@@ -192,7 +162,7 @@ You too may help make these notes better by submitting your improvements to us v
   <!--      -->
   <!-- </ul> -->
 <div class="credits">
-<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;VOLODYMYR KULESHOV &#45;&#45;></span></br> <br> -->
+<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;YEN-CHEN LIN &#45;&#45;></span></br> <br> -->
 <span>Site created with <a href="//jekyllrb.com">Jekyll</a> using the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a>. &copy; 2018</span> 
 </div>  
 </footer>

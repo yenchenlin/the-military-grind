@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Variational inference</title>
-  <meta name="description" content="Lecture notes for Stanford cs228.">
+  <meta name="description" content="Memories in the military.">
 
 
-  <link rel="stylesheet" href="/cs228-notes/css/tufte.css">	
+  <link rel="stylesheet" href="/the-military-grind/css/tufte.css">	
   
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
@@ -32,17 +32,16 @@
 
   </script>
 
-  <link rel="canonical" href="http://localhost:4000/cs228-notes/inference/variational/">
-  <link rel="alternate" type="application/rss+xml" title="Probabilistic graphical modeling course" href="http://localhost:4000/cs228-notes/feed.xml" />
+  <link rel="canonical" href="/the-military-grind/chap_3/variational/">
+  <link rel="alternate" type="application/rss+xml" title="The Military Grind" href="/the-military-grind/feed.xml" />
 </head>
 
   <body>
     <!--- Header and nav template site-wide -->
 <header>
     <nav class="group">
-        <a href="/cs228-notes/">Contents</a>
-	<a href="http://cs.stanford.edu/~ermon/cs228/index.html">Class</a>
-	<a href="http://github.com/ermongroup/cs228-notes">Github</a>
+        <a href="/the-military-grind/">Contents</a>
+	   <a href="http://yclin.me/">About Me</a>
 	</nav>
 </header>
 
@@ -180,7 +179,7 @@ Thus, if <script type="math/tex">p(x) > 0</script> we must have <script type="ma
 
 <p>The figure below illustrates this phenomenon graphically.</p>
 
-<figure><figcaption>Fitting a unimodal approximating distribution q (red) to a multimodal p (blue). Using KL(p||q) leads to a q that tries to cover both modes (a). However, using KL(q||p) forces q to choose one of the two modes of p (b, c).</figcaption><img src="/cs228-notes/assets/img/kldiv.png" /></figure>
+<figure><figcaption>Fitting a unimodal approximating distribution q (red) to a multimodal p (blue). Using KL(p||q) leads to a q that tries to cover both modes (a). However, using KL(q||p) forces q to choose one of the two modes of p (b, c).</figcaption><img src="/the-military-grind/assets/img/kldiv.png" /></figure>
 
 <p>Due to the properties that we just described, we often call <span>​<script type="math/tex">KL(p||q)</script></span> the <em>inclusive</em> KL divergence, while <span>​<script type="math/tex">KL(q||p)</script></span> is the <em>exclusive</em> KL divergence.</p>
 
@@ -278,7 +277,7 @@ We will make this problem feasible by replacing
 
 
     </article>
-    <span class="print-footer">Variational inference - Volodymyr Kuleshov</span>
+    <span class="print-footer">Variational inference - Yen-Chen Lin</span>
     <footer>
   <hr class="slender">
   <!-- <ul class="footer&#45;links"> -->
@@ -306,7 +305,7 @@ We will make this problem feasible by replacing
   <!--      -->
   <!-- </ul> -->
 <div class="credits">
-<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;VOLODYMYR KULESHOV &#45;&#45;></span></br> <br> -->
+<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;YEN-CHEN LIN &#45;&#45;></span></br> <br> -->
 <span>Site created with <a href="//jekyllrb.com">Jekyll</a> using the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a>. &copy; 2018</span> 
 </div>  
 </footer>
