@@ -15,8 +15,8 @@ title: The Military Grind
 
 4. [流言終結者-新訓篇](chap_1/myth_buster/) 
 
-5. [<span style="color:DarkRed">第 1 堂課: 別把自己的價值定義在不能控制的人事物之上</span>](chap_1/highway_to_hell/)
-
+<!--5. [<span style="color:DarkRed">第 1 堂課: 別把自己的價值定義在不能控制的人事物之上</span>](chap_1/highway_to_hell/)
+-->
 ## 6-10 週: 二階段訓
 
 <!--1. [全休](chap_2/directed/):
