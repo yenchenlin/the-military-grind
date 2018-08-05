@@ -83,6 +83,52 @@
 <p>There are many online tutorials on VAEs. 
 Our presentation will probably be a bit more technical than the average, since our goal will be to highlight connections to ideas seen in class, as well as to show how these ideas are useful in machine learning research.</p>
 
+<h2 id="deep-generative-models">Deep generative models</h2>
+
+<p>Consider a <a href="../../representation/directed">directed</a> <a href="../../learning/latent">latent-variable</a> model of the form</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+p(x,z) = p(x|z)p(z)
+</script></div>
+<p>with observed <script type="math/tex">x \in \mathcal{X}</script>, where <script type="math/tex">\mathcal{X}</script> can be continuous, discrete, or latent <script type="math/tex">z \in \mathbb{R}^k</script>.</p>
+
+<p><label for="dp1" class="margin-toggle">⊕</label><input type="checkbox" id="dp1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/the-military-grind/assets/img/faces.png" /><br />Variational autoencoder <script type="math/tex">p(x|z)p(z)</script> applied to a face images (modeled by <script type="math/tex">x</script>). The learned latent space <script type="math/tex">z</script> can be used to interpolate between facial expressions.</span>
+To make things concrete, you may think of <script type="math/tex">x</script> as being an image (e.g. a human face), and <script type="math/tex">z</script> as latent factors (not seen during training) that explain features of the face. For example, one coordinate of <script type="math/tex">z</script> can encode whether the face is happy or sad, another one whether the face is male or female, etc.</p>
+
+<p>We may also be interested in models with many layers, e.g. <script type="math/tex">p(x \mid z_1)p(z_2 \mid z_3)\cdots p(z_{m-1}\mid z_m)p(z_m)</script>. These are often called <em>deep generative models</em> and can learn hierarchies of latent representations.
+In this chapter, we will assume for simplicity that there is only one latent layer.</p>
+
+<h3 id="learning-deep-generative-models">Learning deep generative models</h3>
+
+<p>Suppose now that we are given a dataset <script type="math/tex">D = \{x^1,x^2,...,x^n\}</script>. We are interested in the following <a href="../../inference/variational/">inference</a> and <a href="../../learning/directed/">learning</a> tasks:</p>
+
+<ul>
+  <li>Learning the parameters <script type="math/tex">\theta</script> of <script type="math/tex">p</script>.</li>
+  <li>Approximate posterior inference over <script type="math/tex">z</script>: given an image <script type="math/tex">x</script>, what are its latent factors?</li>
+  <li>Approximate marginal inference over <script type="math/tex">x</script>: given an image <script type="math/tex">x</script> with missing parts, how do we fill-in these parts?</li>
+</ul>
+
+<p>We are also going to make the following additional assumptions</p>
+
+<ul>
+  <li><em>Intractability</em>: computing the posterior probability <script type="math/tex">p(z\mid x)</script> is intractable.</li>
+  <li><em>Big data</em>: the dataset <script type="math/tex">D</script> is too large to fit in memory; we can only work with small, subsampled batches of <script type="math/tex">D</script>.</li>
+</ul>
+
+<p>Many interesting models fall in this class; the variational auto-encoder will be one such model.</p>
+
+<h2 id="trying-out-the-standard-approaches">Trying out the standard approaches</h2>
+
+<p>We have learned several techniques in the class that could be used to solve our three tasks. Let’s try them out.</p>
+
+<p>The <a href="../../learning/latent/">EM algorithm</a> can be used to learn latent-variable models. Recall, however, that performing the E step requires computing the approximate posterior <script type="math/tex">p(z\mid x)</script>, which we have assumed to be intractable. In the M step, we learn the <script type="math/tex">\theta</script> by looking at the entire dataset<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle" /><span class="sidenote">Note, however, that there exists a generalization called online EM, which performs the M-step over mini-batches. </span>, which is going to be too large to hold in memory.</p>
+
+<p>To perform approximate inference, we may use <a href="../../inference/variational/">mean field</a>. 
+Recall, however, that one step of mean field requires us to compute an expectation whose time complexity scales exponentially with the size of  the Markov blanket of the target variable.</p>
+
+<p>What is the size of the <a href="../../representation/undirected/">Markov blanket</a> for <script type="math/tex">z</script>? If we assume that at least one component of <script type="math/tex">x</script> depends on each component of <script type="math/tex">z</script>, then this introduces a <a href="../../representation/directed/">V-structure</a> into the graph of our model (the <script type="math/tex">x</script>, which are observed, are <a href="../../representation/directed/">explaining away</a> the differences among the <script type="math/tex">z</script>). Thus, we know that all the <script type="math/tex">z</script> variables will depend on each other and the Markov blanket of some <script type="math/tex">z_i</script> will contain all the other <script type="math/tex">z</script>-variables. This will make mean-field intractable<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle" /><span class="sidenote">The authors refer to this when they say “the required integrals for any reasonable mean-field VB algorithm are also intractable”. They also discuss the limitations of EM and sampling methods in the introduction and the methods section. </span>. An equivalent (and simpler) explanation is that <script type="math/tex">p</script> will contain a factor <script type="math/tex">p(x_i \mid z_1,...,z_K)</script>, in which all the <script type="math/tex">z</script> variables are tied.</p>
+
+<p>Another approach would be to use <a href="../../inference/sampling/">sampling-based methods</a>. In their seminal 2013 <a href="https://arxiv.org/abs/1312.6114">paper</a> first describing the variational autoencoder, Kingma and Welling compare the VAE against these kinds of algorithms, but they find that these sampling-based methods don’t scale well to large datasets. In addition, techniques such as <a href="../../inference/sampling/">Metropolis-Hastings</a> require a hand-crafted proposal distribution, which might be difficult to choose.</p>
+
 <h2 id="auto-encoding-variational-bayes">Auto-encoding variational Bayes</h2>
 
 <p>We will now going to learn about Auto-encoding variational Bayes (AEVB), an algorithm that can efficiently solve our three inference and learning tasks; the variational auto-encoder will be one instantiation of this algorithm.</p>
