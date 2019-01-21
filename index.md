@@ -17,11 +17,11 @@ title: The Military Grind
 
 <!--5. [<span style="color:DarkRed">第 1 堂課: 別把自己的價值定義在不能控制的人事物之上</span>](chap_1/lesson/)-->
 
-## 6-10 週: 二階段訓
+## 6-15 週: 二階段訓
 
-<!--1. [全休](chap_2/directed/):
+1. [當兵那些好笑的事](chap_2/boring_but_funny/)
 
-2. [圖書館 or 健身房?](chap_2/library_or_gym/):
+<!--2. [圖書館 or 健身房?](chap_2/library_or_gym/):
 
 3. [饒舌](chap_2/undirected/):-->
 
@@ -29,7 +29,7 @@ title: The Military Grind
 
 5. [<span style="color:DarkRed">第 2 堂課: 做選擇前, 觀察自己最能忍受哪一種痛苦而不是只看最喜歡哪一種結果</span>](chap_1/highway_to_hell/)-->
 
-## 11-15 週: 老兵八字輕
+## 退伍後
 
 <!--1. [軍官考試](chap_3/ve/):
 

@@ -118,8 +118,8 @@
 
 <p>Consider a distribution <script type="math/tex">p(\mathbf{x})</script> over images, where <script type="math/tex">\mathbf{x}</script> is an image represented as a vector of pixels, that assigns high probability to images that look realistic and low probability to everything else. Given such a model, we can solve a wide array of interesting tasks.</p>
 
-<p><a id="image-generation"></a>
-### Image Generation</p>
+<p><a id="image-generation"></a></p>
+<h3 id="image-generation">Image Generation</h3>
 
 <p><a href="https://arxiv.org/abs/1710.10196">Radford et al.</a> trained a probabilistic model <script type="math/tex">p(\mathbf{x})</script> that assigns high probability to images that look like bedrooms.  To do so, they trained their model on a dataset of bedroom images, a sample of which is shown below:</p>
 
@@ -145,8 +145,8 @@
 
 <p>Note that the images are not perfect and may need to be refined; however, sampling generates images that are very similiar to what one might expect.</p>
 
-<p><a id="image-inpainting"></a>
-### In-Painting</p>
+<p><a id="image-inpainting"></a></p>
+<h3 id="in-painting">In-Painting</h3>
 
 <p>Using the same <script type="math/tex">p(\mathbf{x})</script> for faces as before, we can also “fill in” the rest of an image. For example, given <script type="math/tex">p(\mathbf{x})</script> and a patch of an existing image (e.g., a piece of a photograph), we can sample from <script type="math/tex">p(\textsf{image} \mid \textsf{patch})</script> and generate different possible ways of completing the image:</p>
 
@@ -154,8 +154,8 @@
 
 <p>Note the importance of a probabilistic model that captures uncertainty: there could be multiple ways to complete the image!</p>
 
-<p><a id="image-denoising"></a>
-### Image Denoising</p>
+<p><a id="image-denoising"></a></p>
+<h3 id="image-denoising">Image Denoising</h3>
 
 <p>Similarly, given an image corrupted by noise (e.g., an old photograph), we can attempt to restore it based on our probabilistic model of what images look like.  Specifically, we want to generate a graphical model that does a good job at modeling the posterior distribution <script type="math/tex">p(\textsf{original image} \mid \textsf{noisy image}).</script>  Then, by observing the noisy image, we can sample or use exact inference to predict the original image.</p>
 
@@ -165,8 +165,8 @@
 
 <p>Knowing the probability distribution can also help us model natural langauge utterances. In this case, we want to construct a probability distribution <script type="math/tex">p(x)</script> over sequences of words or characters <script type="math/tex">x</script> that assigns high probability to proper (English) sentences.  This distribution can be learned from a variety of sources, such as Wikipedia articles.</p>
 
-<p><a id="text-generation"></a>
-### Generation</p>
+<p><a id="text-generation"></a></p>
+<h3 id="generation">Generation</h3>
 
 <p>Let’s say that we have constructed a distribution of word sequences from Wikipedia articles.  We can then sample from this distribution to generate new Wikipedia-like articles like the one below<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle" /><span class="sidenote">From <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">The Unreasonable Effectiveness of Recurrent Neural Networks</a> </span>.</p>
 
@@ -190,8 +190,8 @@ was swear to advance to the resources for those Socialism’s rule,
 was starting to signing a major tripad of aid exile.]]</p>
 </blockquote>
 
-<p><a id="text-translation"></a>
-### Translation</p>
+<p><a id="text-translation"></a></p>
+<h3 id="translation">Translation</h3>
 
 <p>Suppose that we have gathered a training set of paragraphs that were transcribed in both English and Chinese. We can build a probabilistic model <script type="math/tex">p(y \mid x)</script> to generate an English sentence <script type="math/tex">y</script> conditioned on the corresponding Chinese sentence <script type="math/tex">x</script>; this is an instance of <em>machine translation</em>.</p>
 
@@ -201,8 +201,8 @@ was starting to signing a major tripad of aid exile.]]</p>
 
 <p>We can also use probabilitic graphical models for audio applications. Suppose we construct a probability distribution <script type="math/tex">p(x)</script> over audio signals that assigns high probability to ones that sound like human speech.</p>
 
-<p><a id="audio-superresolution"></a>
-### Upsampling or Super-Resolution</p>
+<p><a id="audio-superresolution"></a></p>
+<h3 id="upsampling-or-super-resolution">Upsampling or Super-Resolution</h3>
 
 <p>Given a low resolution version of an audio signal, we can attempt to increase its resolution.  We can formulate this problem as follows: given our speech probability distribution <script type="math/tex">p(x)</script> that “knows” what typical human speech sounds like and some observed values of an audio signal, we aim to calculate signal values at intermediate time points.</p>
 
@@ -214,39 +214,39 @@ was starting to signing a major tripad of aid exile.]]</p>
 
 <p><a href="https://kuleshov.github.io/audio-super-res/">Super resolution of audio signals demo</a></p>
 
-<p><a id="speech-synthesis"></a>
-### Speech synthesis</p>
+<p><a id="speech-synthesis"></a></p>
+<h3 id="speech-synthesis">Speech synthesis</h3>
 
 <p>As we did in image processing, we can also sample the model and generate (synthesize) speech signals.</p>
 
 <p><a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">Super resolution of audio signals demo</a></p>
 
-<p><a id="speech-recognition"></a>
-### Speech recognition
-Given a (joint) model of speech signals and language (text), we can attempt to infer spoken words from audio signals.
+<p><a id="speech-recognition"></a></p>
+<h3 id="speech-recognition">Speech recognition</h3>
+<p>Given a (joint) model of speech signals and language (text), we can attempt to infer spoken words from audio signals.
 <img src="speech.png" alt="Speech" /></p>
 
 <h2 id="applications-in-science-today">Applications in Science Today</h2>
 
-<p><a id="error-correcting-codes"></a>
-### Error Correcting Codes
-In the non-theoretical world, probabilistic models are often used to model communication channels (e.g., Ethernet or Wifi). I.e., if you send a message over a channel, you might get something different on the other end due to noise. Error correcting codes and techniques based on graphical models are used to detect and correct communication errors.
+<p><a id="error-correcting-codes"></a></p>
+<h3 id="error-correcting-codes">Error Correcting Codes</h3>
+<p>In the non-theoretical world, probabilistic models are often used to model communication channels (e.g., Ethernet or Wifi). I.e., if you send a message over a channel, you might get something different on the other end due to noise. Error correcting codes and techniques based on graphical models are used to detect and correct communication errors.
 <img src="Picture1.png" alt="codes" /></p>
 
-<p><a id="comp-bio"></a>
-### Computational Biology</p>
+<p><a id="comp-bio"></a></p>
+<h3 id="computational-biology">Computational Biology</h3>
 
 <p>Graphical models are also widely used in computational biology. For example, given a model of how DNA sequences evolve over time, it is possible to reconstruct a phylogenetic tree from DNA sequences of a given set of species.
 <img src="philo.png" alt="philo" /></p>
 
-<p><a id="ecology"></a>
-### Ecology
-Graphical models are used to study phenomena that evolve over space and time, capturing spatial and temporal dependencies. For example, they can be used to study bird migrations.</p>
+<p><a id="ecology"></a></p>
+<h3 id="ecology">Ecology</h3>
+<p>Graphical models are used to study phenomena that evolve over space and time, capturing spatial and temporal dependencies. For example, they can be used to study bird migrations.</p>
 
 <p><img src="bird_new.gif" alt="birds" /></p>
 
-<p><a id="economics"></a>
-### Economics</p>
+<p><a id="economics"></a></p>
+<h3 id="economics">Economics</h3>
 
 <p>Graphical models can be used to model spatial distributions of quantities of interests (e.g., assets or expenditures based measures of wealth).
 <img src="uganda.png.jpg" alt="birds" /></p>
@@ -255,8 +255,8 @@ Graphical models are used to study phenomena that evolve over space and time, ca
 
 <h2 id="applications-in-health-care-and-medicine">Applications in Health Care and Medicine</h2>
 
-<p><a id="diagnosis"></a>
-### Medical Diagnosis</p>
+<p><a id="diagnosis"></a></p>
+<h3 id="medical-diagnosis">Medical Diagnosis</h3>
 
 <p>Probabilistic graphical models can assist doctors in diagnosing diseases and predicting adverse outcomes. For example, in 1998 the LDS Hospital in Salt Lake City, Utah developed a Bayesian network for diagnosing pneumonia. Their model was able to distinguish patients with pneumonia from patients with other diseases with high sensitivity (0.95) and specificity (0.965), and was used for many years in the clinic. Their network model is outlined below:</p>
 
@@ -306,8 +306,8 @@ Graphical models are used to study phenomena that evolve over space and time, ca
   <!--      -->
   <!-- </ul> -->
 <div class="credits">
-<!-- <span>&#38;copy; 2018 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;YEN-CHEN LIN &#45;&#45;></span></br> <br> -->
-<span>Site created with <a href="//jekyllrb.com">Jekyll</a> using the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a>. &copy; 2018</span> 
+<!-- <span>&#38;copy; 2019 <!&#45;&#45; &#38;#38;nbsp;&#38;#38;nbsp;YEN-CHEN LIN &#45;&#45;></span></br> <br> -->
+<span>Site created with <a href="//jekyllrb.com">Jekyll</a> using the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a>. &copy; 2019</span> 
 </div>  
 </footer>
 
